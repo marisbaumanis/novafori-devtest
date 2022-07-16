@@ -18,35 +18,30 @@ let items: ToDoItem[] = [
 ];
 
 app.get('/api/items', (req, res) => {
-    console.log('items');
     res.send(items);
 });
 
 app.post('/api/create', (req, res) => {
     if (req.body && req.body.description) {
-        items.push({ key: items.length.toString(), description: req.body.description, status: "Pending" });
-        res.sendStatus(200);
+        const item = { key: items.length.toString(), description: req.body.description, status: "Pending" };
+        items.push(item);
+        res.status(200);
+        res.send(item);
     }
     else res.sendStatus(405);
 })
 
 app.post('/api/update', (req, res) => {
-    try {
-        console.log('');
-        console.log(req.body);
-        if (req.body && req.body.key) {
-            const item = items.find(i => i.key == req.body.key);
-            if (item) {
-                if (req.body.description) item.description = req.body.description;
-                if (req.body.status) item.status = req.body.status;
-            }
-            res.sendStatus(200);
+    if (req.body && req.body.key) {
+        const item = items.find(i => i.key == req.body.key);
+        if (item) {
+            if (req.body.description) item.description = req.body.description;
+            if (req.body.status) item.status = req.body.status;
         }
-        else res.sendStatus(405);
+        res.status(200);
+        res.send(item);
     }
-    catch (err) {
-        console.log(err);
-    }
+    else res.sendStatus(405);
 })
 
 // Serve the HTML page
@@ -56,5 +51,5 @@ app.get('*', (req: any, res: any) => {
 
 // start the Express server
 app.listen(port, () => {
-    console.log(`server listening at http://localhost:${port}` );
+    console.log(`server listening at http://localhost:${port}`);
 });
