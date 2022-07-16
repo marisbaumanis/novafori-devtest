@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ToDoItem } from '@my-app/common'
-import ToDoItemComponent from '../todoitemcomponent/ToDoItemComponent';
+import ToDoItemComponent from '../ToDoItemComponent/ToDoItemComponent';
 
 export default function ToDoListComponent(props: { items: ToDoItem[], title: string }) {
     return (

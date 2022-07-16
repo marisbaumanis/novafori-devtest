@@ -1,11 +1,11 @@
 import express from 'express';
 import cors from 'cors';
 import { join } from 'path';
-
 import { ToDoItem } from '@my-app/common';
 const clientPath = '../../client/build';
 const app = express();
 app.use(cors());
+app.use(express.json());
 const port = 8080; // default port to listen
 
 // Serve static resources from the "public" folder (ex: when there are images to display)
@@ -20,6 +20,14 @@ let items: ToDoItem[] = [
 app.get('/api/items', (req, res) => {
     res.send(items);
 });
+
+app.post('/api/create', (req, res) => {
+    console.log(req.body);
+    if (req.body && req.body.description) {
+        items.push({ key: items.length.toString(), description: req.body.description, status: "Pending" });
+        console.log(items);
+    }
+})
 
 // Serve the HTML page
 app.get('*', (req: any, res: any) => {
