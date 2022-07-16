@@ -18,13 +18,24 @@ export default function App() {
             .then(resp => setItems(resp))
             .catch(err => console.log(err))
     };
-    useEffect(() => refreshItems());
+    useEffect(() => refreshItems(), []);
 
     const createItem = (desc: string) => {
         fetch('/api/create', {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ description: desc })
+        })
+            .then(_ => refreshItems())
+            .catch(err => console.log(err))
+    }
+
+    const updateItemStatus = (key: string, newStatus: string) => {
+        console.log(key);
+        fetch('/api/update', {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ key: key, status: newStatus })
         })
             .then(_ => refreshItems())
             .catch(err => console.log(err))
@@ -39,10 +50,12 @@ export default function App() {
               />}
           <div className="lists-container">
               <div className="list-pending">
-                  <ToDoListComponent title="Pending" items={items.filter(i=>i.status == "Pending")} />
+                  <ToDoListComponent title="Pending" items={items.filter(i => i.status == "Pending")}
+                      onItemClicked={i => updateItemStatus(i.key, "Completed")} />
             </div>
             <div className="list-completed">
-                  <ToDoListComponent title="Completed" items={items.filter(i => i.status == "Completed")} />
+                  <ToDoListComponent title="Completed" items={items.filter(i => i.status == "Completed")}
+                      onItemClicked={i => updateItemStatus(i.key, "Pending")} />
                 </div>
           </div>
     </div>

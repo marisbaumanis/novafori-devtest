@@ -18,14 +18,34 @@ let items: ToDoItem[] = [
 ];
 
 app.get('/api/items', (req, res) => {
+    console.log('items');
     res.send(items);
 });
 
 app.post('/api/create', (req, res) => {
-    console.log(req.body);
     if (req.body && req.body.description) {
         items.push({ key: items.length.toString(), description: req.body.description, status: "Pending" });
-        console.log(items);
+        res.sendStatus(200);
+    }
+    else res.sendStatus(405);
+})
+
+app.post('/api/update', (req, res) => {
+    try {
+        console.log('');
+        console.log(req.body);
+        if (req.body && req.body.key) {
+            const item = items.find(i => i.key == req.body.key);
+            if (item) {
+                if (req.body.description) item.description = req.body.description;
+                if (req.body.status) item.status = req.body.status;
+            }
+            res.sendStatus(200);
+        }
+        else res.sendStatus(405);
+    }
+    catch (err) {
+        console.log(err);
     }
 })
 
