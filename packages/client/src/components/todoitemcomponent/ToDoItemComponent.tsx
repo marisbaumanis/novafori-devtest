@@ -6,7 +6,8 @@ export default function ToDoItemComponent(props: { item: ToDoItem, onItemClicked
     return (
         <div className="todoitem">
             <span>{props.item.description}</span>
-            <button onClick={e=>props.onItemClicked(props.item)} />
+            <button className={props.item.status == "Completed" ? "todoitem-completed" : "todoitem-pending"}
+                onClick={e => props.onItemClicked(props.item)} />
         </div>
     );
 }

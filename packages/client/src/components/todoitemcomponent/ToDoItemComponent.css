@@ -9,3 +9,16 @@
     width:16px;
     height:16px;
 }
+
+.todoitem span {
+    max-width:100%;
+    overflow-wrap: break-word;
+}
+
+.todoitem-pending {
+    background-color: yellow;
+}
+
+.todoitem-completed {
+    background-color: green;
+}

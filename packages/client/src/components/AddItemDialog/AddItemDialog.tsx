@@ -1,4 +1,5 @@
 import ReactDOM from "react-dom";
+import './AddItemDialog.css';
 
 export default function AddItemDialog(props: { onCreateClicked: React.FormEventHandler<HTMLFormElement>, onCancelClicked : () => void }) {
     return ReactDOM.createPortal((
@@ -13,11 +14,11 @@ export default function AddItemDialog(props: { onCreateClicked: React.FormEventH
                 <div className="form-group">
                     <input className="form-control" id="description" placeholder="Description" />
                 </div>
-                <div className="form-group">
-                    <button className="form-control btn btn-primary" type="submit">
+                <div className="add-dialog-button-group">
+                    <button className="button" type="submit">
                         Create
                     </button>
-                    <button className="form-control btn btn-primary" type="button" onClick={e=>props.onCancelClicked()}>
+                    <button className="button" type="button" onClick={e=>props.onCancelClicked()}>
                         Cancel
                     </button>
                 </div>

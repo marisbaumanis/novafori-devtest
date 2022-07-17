@@ -41,8 +41,8 @@ export default function App() {
     }
 
   return (
-        <div className="App">
-          <button onClick={e => setShowAddDialog(true)}> Add New Task</button>
+      <div className="App">
+          <button className="button" onClick={e => setShowAddDialog(true)}>Create New Task</button>
           {showAddDialog &&
               <AddItemDialog onCreateClicked={e => { createItem(e.target[0].value); setShowAddDialog(false); }}
                   onCancelClicked={() => setShowAddDialog(false)}
