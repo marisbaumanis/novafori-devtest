@@ -4,8 +4,10 @@ About 6 hours, with a significant portion of the time spent on setup.
 
 ## How do you build and run your solution?
 
-Use a standard 'yarn dev' to run both the Node backend, and the React frontend.
-Use a 'yarn test' to run the unit tests.
+For the initial setup, run 'yarn install' and 'yarn common build'.
+Then, use 'yarn dev' to run both the Node backend, and the React frontend.
+
+Use 'yarn test' to run the unit tests.
 
 ## What technical and functional assumptions did you make when implementing your solution? 
 
