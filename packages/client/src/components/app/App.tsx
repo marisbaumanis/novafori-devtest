@@ -31,7 +31,6 @@ export default function App() {
     }
 
     const updateItemStatus = (key: string, newStatus: string) => {
-        console.log(key);
         fetch('/api/update', {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
